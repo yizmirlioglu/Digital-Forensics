@@ -1,0 +1,141 @@
+
+DIGITAL FORENSICS:
+
+Digital Forensics science investigates data from digital devices such as a camera, smart phone, computer, network component for the purpose of facilitating criminal investigation, private inspection or intelligence. In Izmirlioglu and Erdem (2018, 2020), we have developed NCDC-ASP and 3D-NCDC-ASP frameworks for qualitative reasoning about cardinal directions in 2-dimensional and 3-dimensional space, respectively, using Answer Set Programming (ASP). NCDC-ASP uses nCDC calculus for reasoning about 2D cardinal directions and 3D-NCDC-ASP uses 3D-nCDC calculus for reasoning about 3D cardinal directions over connected domain (Reg) or possibly disconnected domain (Reg*).
+
+Izmirlioglu and Erdem (2020a, 2020b) demonstrate applications of NCDC-ASP and 3D-NCDC-ASP to Digital Forensics and show how qualitative spatial reasoning can be utilized for identifying truthfullness of suspects of a criminal event. NCDC-ASP and 3D-NCDC-ASP can check consistency of spatial constraints in suspect's statement together with the digital evidence and commonsense knowledge. These frameworks can deal with the challenges of incomplete information and commonsense knowledge by disjunctive and default constraints.
+
+This repository includes ASP code and problem instances in Izmirlioglu and Erdem (2020a, 2020b). The "/2D" folder contains the ASP code and problem instances for the Digital Forensics case study in Izmirlioglu and Erdem (2020a). The "/3D" folder contains the ASP code and problem instances corresponding to the Digital Forensics application in Izmirlioglu and Erdem (2020b).
+
+
+
+NCDC-ASP:
+
+The ASP programs in Izmirlioglu and Erdem (2020a) for reasoning with nCDC are under the folder "2D/ASP Programs". All programs are in ASP Core-2 Format and the output in the text are generated with Clingo 5.3.0. The grid size is calculated for the problem instance according to Theorem 1: m,n = 2|V|-1
+
+consistency.lp : Main ASP program in Section 2 to check consistency of a basic nCDC network
+inference.lp : ASP program for consistency checking and inferring unknown CDC relations
+disjunctive.lp : Subprogram for disjunctive CDC constraints
+default.lp : Subprogram for default CDC constraints when the default assumption is represented by a weak constraint
+connected_check.lp : Subprogram for checking connectedness of objects (i.e. whether they belong to Reg)
+
+
+Input Format of NCDC-ASP (.lp file)
+
+Regions are enumerated from 1 to |V|
+
+Nine tiles are written according to below encoding:
+sw: southwest  s:south  se:southeast  w:west  o:on   e:east  nw:northwest  n:north  ne:northeast
+
+Basic CDC constraints:
+relation(u,v,r)  atoms for basic CDC constraint
+u: target object,  u: reference object,  r: tiles of CDC relation (according to above encoding)
+
+Disjunctive CDC constraints:
+disjrelation(u,v,i,r)  atoms for Disjunctive CDC constraint
+u: target object,  u: reference object, i:index of disjunct, r: tiles of each basic relation (according to above encoding)
+
+Default CDC constraints:
+defaultrelation(u,v,r)  atoms for default CDC constraint
+u: target object,  u: reference object,  r: tiles of CDC relation (according to above encoding)
+
+Disjunctive default CDC constraints:
+disjdefaultrelation(u,v,i,r)  atoms for Disjunctive default CDC constraint
+u: target object,  u: reference object, i:index of disjunct, r: tiles of each basic relation (according to above encoding)
+
+Details about consistency checking using NCDC-ASP can be found in repository NCDC-ASP.
+
+
+3D-NCDC-ASP:
+
+The ASP programs in the paper Izmirlioglu and Erdem (2020b) for reasoning with 3D-nCDC calculus are under the folder "3D/ASP Programs". All programs are in ASP Core-2 Format and the output in the text are generated with Clingo 5.3.0. The grid size is calculated for the problem instance according to Theorem 2: m,n,p = 2|V|-1
+
+consistency_3d.lp : Main ASP program in Section 4.3.1 to check consistency of basic 3D-nCDC network
+consistency_3d_explain.lp : ASP program in Section 4.6 to explain source of inconsistency in the 3D-nCDC network
+disjunctive.lp : Subprogram for disjunctive 3D-nCDC constraints in Section 4.3.2
+default.lp : Subprogram for default 3D-nCDC constraints in Section 4.3.3 (default assumption is represented by a weak constraint)
+connected_3d.lp : Subprogram for checking connectedness of objects (i.e. whether they belong to Reg) in Section 4.4
+inference_3d.lp : Subprogram for inferring unknown 3D-nCDC relations in Section 4.5
+
+Input Format of 3D-NCDC-ASP (.lp file)
+
+Objects are enumerated from 1 to |V|.  27 tiles are written according to below encoding:
+
+swb: southwest below  sb:south below  seb:southeast below  wb:west below  ob:on below   eb:east below  nwb:northwest below  nb:north below  neb:northeast below
+
+swm: southwest same level  sm:south same level  sem:southeast same level  wm:west same level  om:on same level   em:east same level  nwm:northwest same level  nm:north same level  nem:northeast same level
+
+swa: southwest above  sa:south above  sea:southeast above  wa:west above  oa:on above   ea:east above  nwa:northwest above  na:north above  nea:northeast above
+
+Basic 3D-nCDC constraints:
+relation(u,v,r)  atoms for basic CDC constraint
+u: target object,  u: reference object,  r: tiles of 3D-nCDC relation (according to above encoding)
+
+Disjunctive 3D-nCDC constraints:
+disjrelation(u,v,i,r)  atoms for Disjunctive 3D-nCDC constraint
+u: target object,  u: reference object, i:index of disjunct, r: tiles of each 3D-nCDC relation (according to above encoding)
+
+Default 3D-nCDC constraints:
+defaultrelation(u,v,r)  atoms for default 3D-nCDC constraint
+u: target object,  u: reference object,  r: tiles of 3D-nCDC relation (according to above encoding)
+
+Details about consistency checking using 3D-NCDC-ASP can be found in repository 3D-NCDC-ASP.
+
+
+
+
+DIGITAL FORENSICS CASE STUDY IN 2D:
+
+We explain how NCDC-ASP framework and consistency checking can be utilized for Digital Forensics by a 2D case study as in Izmirlioglu and Erdem (2020a). ASP encoding of CDC constraints in the digital evidence, commonsense knowledge and suspects' statements are under the folder "/Case Study".
+
+digital_data.lp : CDC constraints in the digital data
+commonsense.lp : Default CDC constraints that represent commonsense knowledge
+additional_data.lp : CDC constraints in the additional digital data discovered later (Section 3)
+suspect1.lp : CDC constraints in the statement of suspect 1
+suspect2.lp : CDC constraints in the statement of suspect 2
+suspect3.lp : CDC constraints in the statement of suspect 3
+
+
+To check consistency of each nCDC network formed by suspect's statement, digital data and commonsense knowledge, run the following commands.
+
+./clingo grid_enum.lp inference.lp default.lp disjunctive.lp connected_check.lp digital_data.lp commonsense.lp suspect1.lp
+./clingo grid_enum.lp inference.lp default.lp disjunctive.lp connected_check.lp digital_data.lp commonsense.lp suspect2.lp
+./clingo grid_enum.lp inference.lp default.lp disjunctive.lp connected_check.lp digital_data.lp commonsense.lp suspect3.lp
+
+Later the detective investigates another camera and discovers further digital evidence (Section 3). To check consistency of suspect's statements with the additional data, run the commands:
+
+./clingo grid_enum.lp inference.lp default.lp disjunctive.lp connected_check.lp digital_data.lp additional_data.lp commonsense.lp suspect1.lp
+./clingo grid_enum.lp inference.lp default.lp disjunctive.lp connected_check.lp digital_data.lp additional_data.lp commonsense.lp suspect2.lp
+./clingo grid_enum.lp inference.lp default.lp disjunctive.lp connected_check.lp digital_data.lp additional_data.lp commonsense.lp suspect3.lp
+
+
+
+
+DIGITAL FORENSICS CASE STUDY IN 3D:
+
+Izmirlioglu and Erdem (2020b) demonstrates a 3D case study to show that 3D-NCDC-ASP framework and consistency checking can also be useful for Digital Forensics. ASP encoding of 3D-nCDC constraints in the digital evidence, commonsense knowledge and suspects' statements are under the folder "/Case Study".
+
+suspect1.lp : 3D-nCDC network which includes digital evidence, commonsense knowledge and statement of suspect 1
+suspect2.lp : 3D-nCDC network which includes digital evidence, commonsense knowledge and statement of suspect 2
+
+
+To check consistency of each 3D-nCDC network formed by suspect's statement, digital data and commonsense knowledge, run the following commands.
+
+./clingo grid_enum.lp consistency_3d.lp default.lp disjunctive.lp connected_3d.lp suspect1.lp
+./clingo grid_enum.lp consistency_3d.lp default.lp disjunctive.lp connected_3d.lp suspect2.lp
+
+To explain the source of inconsistency in the statement of suspect 2, run the command:
+
+./clingo grid_enum.lp consistency_3d_explain.lp default.lp disjunctive.lp connected_3d.lp suspect2.lp
+
+
+
+
+REFERENCES:
+
+Yusuf Izmirlioglu, Esra Erdem. Qualitative Reasoning About Cardinal Directions Using Answer Set Programming.  Proc. of AAAI 2018
+
+Yusuf Izmirlioglu, Esra Erdem. Qualitative Spatial Reasoning for Digital Forensics: A Cardinal Directional Calculus Approach using Answer Set Programming.  Proc. of KR AI2Forensics Workshop, 2020a
+
+Yusuf Izmirlioglu, Esra Erdem. Reasoning about Cardinal Directions between 3-Dimensional Extended Objects using Answer Set Programming.  Theory and Practice of Logic Programming, 2020b
+
