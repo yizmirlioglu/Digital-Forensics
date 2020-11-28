@@ -46,6 +46,8 @@ u: target object,  u: reference object, i:index of disjunct, r: tiles of each ba
 Details about consistency checking using NCDC-ASP can be found in repository NCDC-ASP.
 
 
+
+
 3D-NCDC-ASP:
 
 The ASP programs in the paper Izmirlioglu and Erdem (2020b) for reasoning with 3D-nCDC calculus are under the folder "3D/ASP Programs". All programs are in ASP Core-2 Format and the output in the text are generated with Clingo 5.3.0. The grid size is calculated for the problem instance according to Theorem 2: m,n,p = 2|V|-1
@@ -131,6 +133,14 @@ To explain the source of inconsistency in the statement of suspect 2, run the co
 
 
 
+
+NCDC-ASP AND 3D-NCDC-ASP SOFTWARE:
+
+Under the main folder NCDC-ASP-Software.zip and 3D-NCDC-ASP-Software.zip files contain NCDC-ASP and 3D-NCDC-ASP software for reasoning with cardinal directions in 2D and 3D. The user enters the constraint network and problem input to a file. The software runs the necessary ASP programs and then displays the output: whether the network is consistent, grid size, location of objects, inferred relations, computation time, program size. With these software, the user can check consistency of suspects' statements in an automated way and obtain the outcome in a convenient way. Constraint network for each suspect and documentation can be found inside the zip files.
+
+
+
+
 REFERENCES:
 
 Yusuf Izmirlioglu, Esra Erdem. Qualitative Reasoning About Cardinal Directions Using Answer Set Programming.  Proc. of AAAI 2018
@@ -138,4 +148,3 @@ Yusuf Izmirlioglu, Esra Erdem. Qualitative Reasoning About Cardinal Directions U
 Yusuf Izmirlioglu, Esra Erdem. Qualitative Spatial Reasoning for Digital Forensics: A Cardinal Directional Calculus Approach using Answer Set Programming.  Proc. of KR AI2Forensics Workshop, 2020a
 
 Yusuf Izmirlioglu, Esra Erdem. Reasoning about Cardinal Directions between 3-Dimensional Extended Objects using Answer Set Programming.  Theory and Practice of Logic Programming, 2020b
-
